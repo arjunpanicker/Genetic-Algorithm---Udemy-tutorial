@@ -38,7 +38,7 @@ function [parent1, parent2] = selection(population)
     
     % Parent selection
     R = rand(); % in [0,1]
-    
+    parent1_idx = 0;
     for i = 1: length(cumsum)
         if R > cumsum(i)
             parent1_idx = i-1;

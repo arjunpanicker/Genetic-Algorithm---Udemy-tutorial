@@ -6,7 +6,7 @@ function [child1, child2] = crossover(parent1, parent2, P_c, crossoverName)
     
     switch crossoverName
         case 'single'
-            Cross_P = round((ub - lb)*rand() + lb)
+            Cross_P = round((ub - lb)*rand() + lb);
             Part1 = parent1.Gene(1: Cross_P);
             Part2 = parent2.Gene(Cross_P + 1:end);
             child1.Gene = [Part1, Part2];
@@ -28,8 +28,6 @@ function [child1, child2] = crossover(parent1, parent2, P_c, crossoverName)
                 Cross_P1 = Cross_P2;
                 Cross_P2 = temp;
             end
-            Cross_P1
-            Cross_P2
             
             Part1 = parent1.Gene(1: Cross_P1);
             Part2 = parent2.Gene(Cross_P1 + 1: Cross_P2);
@@ -48,12 +46,12 @@ function [child1, child2] = crossover(parent1, parent2, P_c, crossoverName)
     
     % if R1 <= Crossover prob. then no change req else, child1 = parent1
     if R1 > P_c
-        child1 = parent1.Gene;
+        child1 = parent1;
     end
     
     % if R2 <= Crossover prob. then no change req else, child2 = parent2
     if R2 > P_c
-        child2 = parent2.Gene;
+        child2 = parent2;
     end
     
 end
