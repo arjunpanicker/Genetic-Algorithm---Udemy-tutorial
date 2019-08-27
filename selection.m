@@ -1,6 +1,6 @@
 function [parent1, parent2] = selection(population)
 
-    M = length(population.Chromosomes(:));
+    M = length(population.Chromosomes(:)); % No. of chromosomes (or, population size)
     
     if any([population.Chromosomes(:).fitness] < 0)
         % Fitness Scaling: Solves issues due to negative fitness values (maps
@@ -38,15 +38,16 @@ function [parent1, parent2] = selection(population)
     
     % Parent selection
     R = rand(); % in [0,1]
-    parent1_idx = 0;
+    parent1_idx = M;
     for i = 1: length(cumsum)
         if R > cumsum(i)
             parent1_idx = i-1;
             break;
         end
     end
-    
+
     parent2_idx = parent1_idx;
+    
     while parent2_idx == parent1_idx
         R = rand(); % in [0, 1]
 

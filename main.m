@@ -1,28 +1,21 @@
+% Genetic Algorithm V1.0
+
 clear; clc;
 
-M = 10; % number of chromosomes (candidate solutions)
-N = 8; % number of genes in each chromosome (variables)
+%% controlling parameters of GA
+Problem.objF = @sphere;
+Problem.nVar = 10;
+objF = @sphere; % Objective function address
 
-for i = 1:M
-    rand();
-    population.Chromosomes(i).Gene(:) = [round( rand() ), round( rand() ), round( rand() ), round( rand() ), round( rand() ), round( rand() ), round( rand() ), round( rand() )];
-    population.Chromosomes(i).fitness = sphere(population.Chromosomes(i).Gene(:));
-end
+M = 100; % number of chromosomes (candidate solutions)
+N = Problem.nVar; % number of genes in each chromosome (variables)
+MaxGen = 10; % Maximum generation
+Pc = 0.85;  % Probability of crossover
+Pm = 0.01; % Probability of mutation
+Er = 0.2; % Elitism Ratio
 
-for k = 1:2:M
-    
-    % Selection
-    [parent1, parent2] = selection(population)
-    
-    % Crossover
-    P_c = 0.5;  % Probability of crossover
-    [child1, child2] = crossover(parent1, parent2, P_c, 'single');
-    
-    % Mutation
-    Pm = 0.2;
-    [child1] = mutation(child1, Pm);
-    [child2] = mutation(child2, Pm);
-    
-    newPopulation.Chromosomes(k).Gene = child1.Gene;
-    newPopulation.Chromosomes(k+1).Gene = child2.Gene;
-end
+%%
+
+%% Calling the GA function
+
+[BestChromosome] = GeneticAlgorithm(M, N, MaxGen, Pc, Pm, Er, Problem.objF)
